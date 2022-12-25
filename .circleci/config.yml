@@ -120,7 +120,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          keys: [frontend-build]
+          keys: [frontend-test]
       - run:
           name: Scan frontend
           command: |
@@ -139,12 +139,13 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          keys: [backend-build]
+          keys: [backend-test]
       - run:
           name: Scan backend
           command: |
             cd backend
             npm install
+            # npm install oauth-sign@^0.9.0
             npm audit fix --audit-level=critical
       - save_cache:
           paths: [backend/node_modules]
