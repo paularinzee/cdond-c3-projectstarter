@@ -225,7 +225,7 @@ jobs:
       - checkout
       - add_ssh_keys:
           fingerprints:
-            - 88:4a:88:5c:92:9e:3a:37:75:0d:d5:93:1a:c4:04:cd
+            - "88:4a:88:5c:92:9e:3a:37:75:0d:d5:93:1a:c4:04:cd"
       - attach_workspace:
           at: ~/
      
@@ -262,7 +262,6 @@ jobs:
           command: |
             if grep -q "has been executed successfully." ~/project/backend/migrations_dump.txt
             then
-              echo ${CIRCLE_WORKFLOW_ID:0:7}
               curl --insecure https://kvdb.io/MjQwMcgGbszGJZAkAzyMSj/migration_${CIRCLE_WORKFLOW_ID:0:7}  -d '1'
             fi
       - destroy-environment
