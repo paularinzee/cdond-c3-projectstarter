@@ -20,5 +20,5 @@
     -name: "move env variables to /etc/profile/"
     become: true
     copy:
-    src:myenv.sh
-    dest: /etc/profile.d/
+      src: myenv.sh
+      dest: /etc/profile.d/
