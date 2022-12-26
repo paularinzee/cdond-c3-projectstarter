@@ -235,19 +235,19 @@ jobs:
       #     command: |
       #       # Your code here
       #       exit 1
-      # - run:
-      #     name: Configure server
-      #     command: |
-      #       cd .circleci/ansible/
-      #       ansible-playbook -i inventory.txt configure-server.yml
-      # - destroy-environment:
+      - run:
+          name: Configure server
+          command: |
+            cd .circleci/ansible/
+            ansible-playbook -i inventory.txt configure-server.yml
+      - destroy-environment:
           # workflow-id: ${CIRCLE_WORKFLOW_ID:0:7}
       # Here's where you will add some code to rollback on failure      
 
   run-migrations:
     docker:
       # Docker image here that supports NodeJS
-       image: circleci/node:13.8.0
+      - image: circleci/node:13.8.0
     steps:
       - checkout
       - run:
