@@ -17,7 +17,7 @@ commands:
     parameters:
       # Add parameter here 
       workflow_id:
-        default: "${CIRCLE_WORKFLOW_ID:0:7}"
+        default: ${CIRCLE_WORKFLOW_ID:0:7}
         type: string  
         
     steps:
@@ -37,7 +37,7 @@ commands:
     parameters:
       # Add parameter here
       workflow_id:
-        default: "${CIRCLE_WORKFLOW_ID:0:7}"
+        default: ${CIRCLE_WORKFLOW_ID:0:7}
         type: string
          
     steps:
@@ -242,6 +242,7 @@ jobs:
           at: ~/
      
       - install_ansible
+      - install_awscli
       
       - run:
           name: Configure server
