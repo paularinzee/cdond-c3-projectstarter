@@ -1,38 +1,24 @@
----
-- name: "Creates backend app directory"
-  file:
-    path: ~/backend-app
-    state: directory
-
-- name: "Unarchive backend files"
-  unarchive:
-    src: artifact.tar.gz
-    dest: ~/backend-app
-
-- name: "Installing Node Dependencies"
-  shell: |
-    cd ~/backend-app
-    npm i
-- name: "Executing Node app with PM2"
-  shell: |
-    cd ~/backend-app/dist
-
-    cd ../
-    npm install
-    
-    npm run build
-
-    sudo npm install forever -g
-    sudo npm install ts-node -g
-    forever start -c "ts-node -r tsconfig-paths/register -r dotenv/config src/main.ts" ./
-    
-  register: execute_node
-
-- name: print message
-  debug:
-    msg: "{{ execute_node.stdout_lines }}"
-
-- name: "Configure pm2 to start as service"
+- name: Add node source 
   become: true
   shell: |
-    env PATH=$PATH:/usr/local/bin pm2 startup systemd -u ubuntu --hp /home/ubuntu
+    curl -s https://deb.nodesource.com/setup_13.x | sudo -E bash -
+- name: "install nodejs 13"
+  become: true
+  apt:
+    name: [ "nodejs"]
+    state: latest
+    update_cache: yes
+
+- name: "install pm2"
+  become: yes
+  npm:
+    name: pm2
+    global: yes
+    # production: yes
+    # state: present
+
+    -name: "move env variables to /etc/profile/"
+    become: true
+    copy:
+    src:myenv.sh
+    dest: /etc/profile.d/
