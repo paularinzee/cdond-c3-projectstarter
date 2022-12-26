@@ -158,7 +158,7 @@ jobs:
     steps:
       # Checkout code from git
       -chekout
-      -run:
+      - run:
         name: Install dependencies
         command: |
           yum install -y tar gzip
