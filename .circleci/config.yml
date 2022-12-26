@@ -154,15 +154,14 @@ jobs:
   deploy-infrastructure:
     docker:
       # Docker image here that supports AWS CLI
-      - image: amazon/aws-cli
+     - image: amazon/aws-cli
     steps:
       # Checkout code from git
-      - chekout
+      - checkout
       - run:
-        name: Install dependencies
-        command: |
-          yum install -y tar gzip
-
+          name: Install dependencies
+          command: |
+            yum install -y tar gzip
       - run:
           name: Ensure back-end infrastructure exists
           command: |
@@ -170,21 +169,24 @@ jobs:
               --template-file .circleci/files/backend.yml \
               --stack-name "udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}" \
               --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}"  \
-              --tags project=udapeople 
+              --tags project=udapeople
+            
+               
              
       - run:
           name: Ensure front-end infrastructure exist
           command: |
             aws cloudformation deploy \
-               --template-file .circleci/files/frontend.yml \
-               --stack-name "udapeople-frontend-${CIRCLE_WORKFLOW_ID:0:7}" \
-               --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}"  \
-               --tags project=udapeople 
-             
+              --template-file .circleci/files/frontend.yml \
+              --stack-name "udapeople-frontend-${CIRCLE_WORKFLOW_ID:0:7}" \
+              --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}"  \
+              --tags project=udapeople
+              
               
       - run:
           name: Add back-end ip to ansible inventory
           command: |
+          
             # Your code here
             cd .circleci/ansible
             cat inventory.txt
@@ -198,7 +200,6 @@ jobs:
             # --output text 
             # )
             # echo ${BACKEND_IP}
-
       - persist_to_workspace:
           root: ~/
           paths:
