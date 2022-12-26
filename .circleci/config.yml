@@ -154,10 +154,10 @@ jobs:
   deploy-infrastructure:
     docker:
       # Docker image here that supports AWS CLI
-      -image: amazon/aws-cli
+      - image: amazon/aws-cli
     steps:
       # Checkout code from git
-      -chekout
+      - chekout
       - run:
         name: Install dependencies
         command: |
