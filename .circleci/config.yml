@@ -203,7 +203,7 @@ jobs:
           name: Install dependencies
           command: |
             apk add --update --no-cache tar gzip ansible aws-cli
-            exit 1
+            
       - attach_workspace:
           at: ~/
       - run:
@@ -225,7 +225,7 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            apk add --update --no-cache tar gzip nodejs aws-cli
+            apk add --update --no-cache tar gzip aws-cli
       - restore_cache:
           keys: [backend-build]
       - run:
