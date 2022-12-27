@@ -297,7 +297,6 @@ jobs:
               curl --insecure https://kvdb.io/MjQwMcgGbszGJZAkAzyMSj/migration_${CIRCLE_WORKFLOW_ID:0:7}  -d '1'
             fi
       - destroy-environment
-        workflow-id: ${CIRCLE_WORKFLOW_ID:0:7}
       - revert-migrations
           
     # steps:
