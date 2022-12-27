@@ -132,18 +132,18 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          keys: [backend-build]
+          keys: [scanbackend-test]
       - run:
-          name: Analyse backend
+          name: Scan-backend
           command: |
             cd backend
-            npm install oauth-sign@^0.9.0
+            npm install
+            # npm install oauth-sign@^0.9.0
             npm audit fix --audit-level=critical --force
-            npm audit fix --audit-level=critical --force
-            npm audit --audit-level=critical
       - save_cache:
           paths: [backend/node_modules]
           key: scanbackend-test
+
 
 #   deploy-infrastructure:
 #     docker:
