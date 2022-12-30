@@ -52,9 +52,8 @@ commands:
             aws cloudformation delete-stack --stack-name "udapeople-frontend-<<parameters.workflow_id>>"
             
   revert-migrations:
-    description: Revert the last migration if successfully run in the current workflow.
+    description: Revert the last migration.
     parameters:
-      # Add parameter here
       workflow_id:
         default: "${CIRCLE_WORKFLOW_ID:0:7}"
         type: string
@@ -85,7 +84,7 @@ jobs:
       - run:
           name: Build front-end
           command: |
-            # Your code here
+            
             cd frontend
             npm install
             npm run build
@@ -115,10 +114,10 @@ jobs:
 
   test-frontend:
     docker:
-      # Docker image here
+      
       - image: circleci/node:13.8.0
     steps:
-      # Checkout code from git
+      
       - checkout
       - restore_cache:
           keys: [frontend-build]
@@ -136,10 +135,10 @@ jobs:
                
   test-backend:
     docker:
-      # Docker image here
+      
       - image: circleci/node:13.8.0
     steps:
-      # Checkout code from git
+      
       - checkout
       - restore_cache:
           keys: [backend-build]
@@ -157,7 +156,7 @@ jobs:
             
   scan-frontend:
     docker:
-      # Docker image here
+      
       - image: circleci/node:13.8.0
     steps:
       - checkout
@@ -170,6 +169,7 @@ jobs:
             npm install
             # npm install oauth-sign@^0.9.0
             npm audit fix --audit-level=critical --force
+            # npm audit --audit-level=critical 
       - save_cache:
           paths: [frontend/node_modules]
           key: scanfrontend-test
@@ -195,10 +195,10 @@ jobs:
 
   deploy-infrastructure:
     docker:
-      # Docker image here that supports AWS CLI
+      
      - image: amazon/aws-cli
     steps:
-      # Checkout code from git
+      
       - checkout
       - run:
           name: Install dependencies
@@ -246,11 +246,11 @@ jobs:
           root: ~/
           paths:
             - project/.circleci/ansible/inventory.txt
-      # Here's where you will add some code to rollback on failure      
+      
 
   configure-infrastructure:
     docker:
-      # Docker image here that supports Ansible
+      
       - image: cimg/base:stable
     steps:
       - checkout
@@ -261,7 +261,7 @@ jobs:
           at: ~/
      
       - install_ansible
-      # - install_awscli
+      - install_awscli
       
       - run:
           name: Configure server
