@@ -1,7 +1,5 @@
 [URL01]: https://github.com/paularinzee/cdond-c3-projectstarter  (Public github repo)
 
-[URL02]: http://udapeople-94afb3e.s3-website-us-east-1.amazonaws.com   (S3 Public Address)
+[URL02]: http://udapeople-ee5c307.s3-website-us-east-1.amazonaws.com/#/employees   (S3 Public Address)
 
-[URL03]: https://d5a0pgzylkq0k.cloudfront.net  (cloudfront domain name url)
-
-[URL04]: http://ec2-54-210-169-250.compute-1.amazonaws.com:9090/targets
+[URL03]: http://ec2-3-91-49-104.compute-1.amazonaws.com:9090/targets
